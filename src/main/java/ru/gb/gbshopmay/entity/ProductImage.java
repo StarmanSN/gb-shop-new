@@ -8,10 +8,6 @@ import ru.gb.gbshopmay.entity.common.BaseEntity;
 
 import javax.persistence.*;
 
-/**
- * @author Artem Kropotov
- * created at 26.06.2022
- **/
 @Entity
 @Table(name = "product_image")
 @Setter
