@@ -10,10 +10,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-/**
- * @author Artem Kropotov
- * created at 22.06.2022
- **/
 @Setter
 @Getter
 @NoArgsConstructor

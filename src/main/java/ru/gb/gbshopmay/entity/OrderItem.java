@@ -9,10 +9,6 @@ import ru.gb.gbshopmay.entity.common.BaseEntity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-/**
- * @author Artem Kropotov
- * created at 22.06.2022
- **/
 @Setter
 @Getter
 @NoArgsConstructor
