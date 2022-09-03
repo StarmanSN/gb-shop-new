@@ -2,6 +2,9 @@ package ru.gb.gbshopmay.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +13,7 @@ import ru.gb.gbshopmay.dao.CategoryDao;
 import ru.gb.gbshopmay.entity.Category;
 import ru.gb.gbshopmay.web.dto.mapper.CategoryMapper;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,8 +23,8 @@ import java.util.stream.Collectors;
 public class CategoryService {
     private final CategoryDao categoryDao;
     private final CategoryMapper categoryMapper;
-    
 
+    @CachePut(value = "category", key = "#category.title")
     public CategoryDto save(CategoryDto categoryDto) {
         Category category = categoryMapper.toCategory(categoryDto);
         if (category.getId() != null) {
@@ -31,10 +35,11 @@ public class CategoryService {
         return categoryMapper.toCategoryDto(categoryDao.save(category));
     }
 
-
+    @Cacheable("category")
     @Transactional(readOnly = true)
     public CategoryDto findById(Long id) {
-        return categoryMapper.toCategoryDto(categoryDao.findById(id).orElse(null));
+        return categoryMapper.toCategoryDto(categoryDao.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Category not found by id: " + id)));
     }
 
     public List<CategoryDto> findAll() {
@@ -43,6 +48,7 @@ public class CategoryService {
                 .collect(Collectors.toList());
     }
 
+    @CacheEvict("category")
     public void deleteById(Long id) {
         try {
             categoryDao.deleteById(id);

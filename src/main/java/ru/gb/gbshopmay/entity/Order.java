@@ -15,10 +15,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-/**
- * @author Artem Kropotov
- * created at 22.06.2022
- **/
 @Setter
 @Getter
 @NoArgsConstructor
