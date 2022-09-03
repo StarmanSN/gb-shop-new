@@ -1,22 +1,11 @@
 package ru.gb.gbshopmay;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import ru.gb.gbapimay.common.enums.Status;
-import ru.gb.gbshopmay.dao.CategoryDao;
-import ru.gb.gbshopmay.dao.ManufacturerDao;
-import ru.gb.gbshopmay.dao.ProductDao;
-import ru.gb.gbshopmay.entity.Category;
-import ru.gb.gbshopmay.entity.Manufacturer;
-import ru.gb.gbshopmay.entity.Product;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Set;
+import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
+@EnableCaching
 public class GbShopMayApplication {
 
     public static void main(String[] args) {
